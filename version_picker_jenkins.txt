@@ -1,0 +1,87 @@
+// IMPORTANT: THIS FILE IS AUTO GENERATED! DO NOT EDIT MANUALLY
+/* tslint:disable */
+export const VERSION = {
+  dirty: true,
+  raw: 'v2.5.9-rc.89-3-ga10f1e046-dirty',
+  hash: 'ga10f1e046',
+  distance: 3,
+  tag: 'v2.5.9-rc.89',
+  semver: {
+    options: {
+      loose: false,
+      includePrerelease: false,
+    },
+    loose: false,
+    raw: 'v2.5.9-rc.89',
+    major: 2,
+    minor: 5,
+    patch: 9,
+    prerelease: ['rc', 89],
+    build: [],
+    version: '2.5.9-rc.89',
+  },
+  suffix: '3-ga10f1e046-dirty',
+  semverString: '2.5.9-rc.89+3.ga10f1e046',
+  version: '2.5.9-rc.90',
+  crux: {
+    components: 'v4.5.9',
+    services: 'v4.0.9',
+    themes: 'v4.0.0',
+  },
+};
+/* tslint:enable */
+
+
+
+stage('version picker') {
+      steps {
+        script {
+          if(customVersion) {
+		    sh("yarn run studio:version:generate")
+            imageVersion = readVersionFromFile_v1("$WORKSPACE/$uiPath/package.json")
+            sh("grep "version" package.json | cut -c 15-25 > "$WORKSPACE/$uiPath/version.ts"")
+            imageVersion = readVersionFromFile_v1("$WORKSPACE/$uiPath/version.ts")
+          }else if ( customIncVersion && "sit".equalsIgnoreCase("${branch}") ) {
+	              version = 
+env.versionInp=version
+                def script_output= sh(returnStdout: true,script: '''#!/bin/bash
+                verionString="${versionInp}"
+                v1=$( echo "$verionString" | awk -F'-rc.' '{print $1}')
+                v2=$( echo "$verionString" | awk -F'-rc.' '{print $2}')
+                v2=$((v2+1))
+                v3="$v1-rc.$v2"
+                echo "$v3"
+                ''' )
+                echo "===updated version==="
+		            script_output= script_output.trim()
+                imageVersion=script_output
+	 }
+
+
+
+yarn run version:as 2.4.5-rc.12
+
+
+https://us05web.zoom.us/j/86272409596?pwd=MkVEUitsYUl4TXY3cjloUVZuUi8rUT09
+
+Join Zoom Meeting
+https://us05web.zoom.us/j/86272409596?pwd=MkVEUitsYUl4TXY3cjloUVZuUi8rUT09
+
+Meeting ID: 862 7240 9596
+Passcode: 2YpiWh
+
+
+
+stage('Docker build') {
+          steps {
+            script {
+              // (21-Sep-2020) DPE-9847: Added one more docker param nginx_conf_dir to pick region specific nginx conf file
+              dockerBuild_v1("${image}", "${lImage}", "branch_name=$environment,nginx_conf_dir=$nginx_conf_dir,$buildArgs")
+            }
+          }
+        }
+
+You will need node, yarn and VS Code or equivalent IDE installed locally.
+Run yarn create-npmrc to ensure you are pointing to the right nexus repository.
+Run yarn to get the dependencies installed.
+Run yarn start to get dev server up and running on http://localhost:4200
